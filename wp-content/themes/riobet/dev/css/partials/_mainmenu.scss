@@ -1,0 +1,64 @@
+.menu{
+    list-style: none;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    li{
+        flex: 0 0 20%;
+
+        min-height: 62px;
+
+        border-right: 1px solid #313538;
+        &:last-child{
+            border: none;
+        }
+
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            width: 100%;
+            height: 100%;
+            padding: 6px 0;
+
+            color: #fff;
+            font-size: 9px;
+            text-transform: uppercase;
+
+            background-color: #3d4347;
+
+            @include phones-small{
+                font-size: 9px;
+            }
+
+            @include phones-normal{
+                font-size: 12px;
+            }
+
+            @include laptop{
+                font-size: 25px;
+                transition: color .4s;
+                flex-direction: row;
+
+                &:hover{
+                    color: $site-color;
+                }
+            }
+
+            img{
+                margin-bottom: 7px;
+                
+                @include laptop{
+                    padding-right: 10px;
+                    margin-bottom: 0;
+                }
+            }
+
+
+        }
+    }
+}

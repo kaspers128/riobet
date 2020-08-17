@@ -1,0 +1,58 @@
+$ff: Verdana, arial, sans-serif;
+$fz: 16px;
+$site-color: #d4b37a;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+
+    &:hover{
+        color: $site-color;
+    }
+}
+
+img{
+    max-width: 100%;
+}
+
+body{
+    background-image: url(img/main-bg.jpg);
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+
+    font-family: $ff;
+    font-size: $fz;
+    line-height: 1;
+
+    &.hidden{
+        overflow: hidden;
+    }
+
+    @include laptop{
+        padding-bottom: 150px;
+    }
+
+}
+
+.container{
+    width: 100%;
+    max-width: 1205px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &.wrap__container{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

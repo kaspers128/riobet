@@ -1,0 +1,117 @@
+.header{
+    background: #000000b3;
+
+    .header-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
+        padding: 10px 0;
+    }
+
+    ul{
+        list-style: none;
+    }
+}
+
+.logo{
+
+    display: block;
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+
+    background-image: url(img/logo-mob.svg);
+    background-size: cover;
+
+    @include laptop{
+        width: 223px;
+        height: 76px;
+
+        flex: 0 0 223px;
+
+        background-image: url(img/logo.svg);
+    }
+
+}
+
+.header-ul{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__item{
+        
+        margin-left: 5px;
+
+        @include phones-normal{
+            margin-left: 15px;
+        }
+
+        a{
+            display: block;
+
+            text-transform: uppercase;
+
+            font-size: 14px;
+
+            @include phones-normal{
+                font-size: 16px;
+            }
+
+            &.header-ul__item-reg {
+                display: flex;
+                align-items: center;
+                padding: 0 10px;
+                background-color: $site-color;
+                text-transform: uppercase;
+                color: #000;
+                height: 30px;
+                transition: color .4s;
+
+                @include phones-normal{
+                    font-size: 18px;
+                }
+
+                &:hover{
+                    color: #fff;
+                }
+            }
+
+            &.header-ul__link-auth{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                svg{
+                    display: block;
+                    margin-right: 8px;
+                    width: 27px;
+                    height: 27px;
+                    fill: $site-color;
+                }
+            }
+        }
+
+        .burger__icon{
+            display: block;
+            width: 33px;
+            height: 30px;
+            fill: $site-color;
+        }
+
+
+
+    }
+}
+
+.main-wrap {
+    display: grid;
+    grid-template-areas: "aside-top" "content" "aside-bottom";
+
+    @include laptop{
+        grid-template-areas: "aside-top content" "aside-bottom content";
+        grid-template-rows: max-content;
+    }
+}

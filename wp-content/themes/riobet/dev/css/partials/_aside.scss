@@ -1,0 +1,157 @@
+.aside-top {
+    padding: 14px 0;
+
+    background: #1a1d1e;
+    background: linear-gradient(to bottom,#1a1d1e 0,#252b2e 100%);
+
+    border-top: 3px solid #d6b678;
+
+    grid-area: aside-top;
+
+    @include laptop{
+        border-top: 0;
+    }
+
+    &__head{
+        @include tablets{
+            position: relative;
+        }
+    }
+
+    .h2 {
+        margin-bottom: 10px;
+
+        svg{
+            width: 33px;
+        }
+    }
+}
+
+.jackpot-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    @include tablets{
+        justify-content: center;
+    }
+
+    @include laptop{
+        justify-content: flex-start;
+    }
+
+
+    &__title{
+        color: $site-color;
+        font-weight: 700;
+        font-size: 22px;
+        margin-bottom: 10px;
+        flex: 1 0 100%;
+
+        @include tablets{
+            position: absolute;
+            right: 0;
+            top: 20px;
+        }
+
+        @include laptop{
+            position: static;
+            text-align: right;
+        }
+    }
+
+    &__img{
+        width: 75px;
+        margin-right: 15px;
+    }
+
+    &__sum{
+        font-size: 24px;
+        line-height: 20px;
+        font-weight: 700;
+        color: #FFF;
+
+        span{
+            color: $site-color;
+        }
+    }
+}
+
+.aside-bottom{
+    grid-area: aside-bottom;
+
+    background-color: #1d2021;
+    padding-top: 28px;
+
+    @include laptop{
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 27px;
+            background: linear-gradient(to bottom,#000 0,rgba(0,0,0,0) 88%);
+        }
+    }
+
+    .h2{
+        svg{
+            width: 40px;
+        }
+    }
+
+    .winners {
+        margin-top: 20px;
+
+        &__item{
+            border-top: 1px solid #484a4b;
+            padding: 10px 0;
+        }
+
+        .winner{
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            &__img{
+                display: block;
+
+                margin-right: 10px;
+                
+                background-color: #0e0f10;
+                border: 1px solid #262b2f;
+
+                img{
+                    display: block;
+                    width: 68px;
+                }
+            }
+
+            &__sum{
+                position: absolute;
+                top: 10px;
+                right: 0;
+                color: #fff;
+            }
+
+            &__info {
+                color: #fff;
+            }
+
+            &__name {
+                display: block;
+                padding-right: 50px;
+                font-weight: bold;
+                margin-bottom: 8px;
+            }
+        }
+    }
+}
+
+.content{
+    grid-area: content;
+}
