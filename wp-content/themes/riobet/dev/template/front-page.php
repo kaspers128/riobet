@@ -6,6 +6,15 @@ Template Name: MainPage
 ?>
 <?php 
 get_header();
+
+//slider param
+$argsSlider = array(
+    'cat' => 8,
+    'posts_per_page' => 10,
+    'orderby' => 'date',
+);
+$slider = new WP_Query($argsSlider);
+
 ?>
 
 <section class="slider">
@@ -13,30 +22,22 @@ get_header();
         <svg viewBox="0 0 8.898 14.784" id="slider-arrow" xmlns="http://www.w3.org/2000/svg"><path d="M7.773 14.784a1.03 1.03 0 0 1-.73-.303L0 7.439 7.136.303a1.03 1.03 0 1 1 1.46 1.459L2.92 7.439l5.583 5.583a1.031 1.031 0 0 1-.73 1.762z"></path></svg>
     </a>
     <div class="slider__inner">
-    <?
-            
-            $args = array(
-                'cat' => 8,
-                'posts_per_page' => 10,
-                'orderby' => 'date',
-            );
-            
-            $q = new WP_Query($args);
-            
-            if($q->have_posts()) {
-                while($q->have_posts()){ $q->the_post();?>
-                    <div class="slider__item">
-                        <img src="<? the_field("slider-img"); ?>" alt="" />
-                        <div class="slider__info">
-                            <div class="slider__title"><? the_field("slider-text"); ?></div>
-                            <div class="slider__btn">
-                                <a href="#" class="btn btn-style"><? the_field("slider-btn"); ?></a>
-                            </div>
+    <?    
+        if($slider->have_posts()) {
+            while($slider->have_posts()){ $slider->the_post();?>
+                <div class="slider__item">
+                    <img src="<? the_field("slider-img"); ?>" alt="" />
+                    <div class="slider__info">
+                        <div class="slider__title"><? the_field("slider-text"); ?></div>
+                        <div class="slider__btn">
+                            <a href="#" class="btn btn-style"><? the_field("slider-btn"); ?></a>
                         </div>
                     </div>
-                <? }
-            }
-                wp_reset_postdata();?>
+                </div>
+            <? }
+        }
+        wp_reset_postdata();
+    ?>
     </div>
     <a href="#" class="slider__str slider__next">
         <svg viewBox="0 0 8.898 14.784" id="slider-arrow" xmlns="http://www.w3.org/2000/svg"><path d="M7.773 14.784a1.03 1.03 0 0 1-.73-.303L0 7.439 7.136.303a1.03 1.03 0 1 1 1.46 1.459L2.92 7.439l5.583 5.583a1.031 1.031 0 0 1-.73 1.762z"></path></svg>

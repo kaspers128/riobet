@@ -6,6 +6,40 @@ Template Name: MainPage
 ?>
 <?php 
 get_header();
+
+//slider param
+$argsSlider = array(
+    'cat' => 8,
+    'posts_per_page' => 10,
+    'orderby' => 'date',
+);
+$slider = new WP_Query($argsSlider);
+
+//mainmenu param
+$argsMainMenu = array( 
+    'theme_location'=>'left',
+    'container'=>'',
+    'depth'=> 0);
+
+//popular param
+$argsPopular = array(
+    'cat' => 5,
+	'posts_per_page' => 6,
+	'orderby' => 'rand',
+);
+
+$popular = new WP_Query($argsPopular);
+
+
+//new
+$argsNew = array(
+    'cat' => 6,
+    'posts_per_page' => 6,
+    'orderby' => 'date',
+);
+
+$new = new WP_Query($argsNew);
+
 ?>
 
 <section class="slider">
@@ -13,30 +47,22 @@ get_header();
         <svg viewBox="0 0 8.898 14.784" id="slider-arrow" xmlns="http://www.w3.org/2000/svg"><path d="M7.773 14.784a1.03 1.03 0 0 1-.73-.303L0 7.439 7.136.303a1.03 1.03 0 1 1 1.46 1.459L2.92 7.439l5.583 5.583a1.031 1.031 0 0 1-.73 1.762z"></path></svg>
     </a>
     <div class="slider__inner">
-    <?
-            
-            $args = array(
-                'cat' => 8,
-                'posts_per_page' => 10,
-                'orderby' => 'date',
-            );
-            
-            $q = new WP_Query($args);
-            
-            if($q->have_posts()) {
-                while($q->have_posts()){ $q->the_post();?>
-                    <div class="slider__item">
-                        <img src="<? the_field("slider-img"); ?>" alt="" />
-                        <div class="slider__info">
-                            <div class="slider__title"><? the_field("slider-text"); ?></div>
-                            <div class="slider__btn">
-                                <a href="#" class="btn btn-style"><? the_field("slider-btn"); ?></a>
-                            </div>
+    <?    
+        if($slider->have_posts()) {
+            while($slider->have_posts()){ $slider->the_post();?>
+                <div class="slider__item">
+                    <img src="<? the_field("slider-img"); ?>" alt="" />
+                    <div class="slider__info">
+                        <div class="slider__title"><? the_field("slider-text"); ?></div>
+                        <div class="slider__btn">
+                            <a href="#" class="btn btn-style"><? the_field("slider-btn"); ?></a>
                         </div>
                     </div>
-                <? }
-            }
-                wp_reset_postdata();?>
+                </div>
+            <? }
+        }
+        wp_reset_postdata();
+    ?>
     </div>
     <a href="#" class="slider__str slider__next">
         <svg viewBox="0 0 8.898 14.784" id="slider-arrow" xmlns="http://www.w3.org/2000/svg"><path d="M7.773 14.784a1.03 1.03 0 0 1-.73-.303L0 7.439 7.136.303a1.03 1.03 0 1 1 1.46 1.459L2.92 7.439l5.583 5.583a1.031 1.031 0 0 1-.73 1.762z"></path></svg>
@@ -44,11 +70,7 @@ get_header();
 </section>
 <nav>
     <?php
-        $args = array( 
-            'theme_location'=>'left',
-            'container'=>'',
-            'depth'=> 0);
-        wp_nav_menu($args);
+        wp_nav_menu($argsMainMenu);
     ?>
 </nav>
 <section class="main-wrap">
@@ -58,41 +80,34 @@ get_header();
                 <svg viewBox="0 0 41.499 53.284" id="popular-games" xmlns="http://www.w3.org/2000/svg"><path fill="#D5B577" d="M38.507 35.521c-.048-.626-.206-1.272-.423-1.936-.089-11.28 3.415-15.954 3.415-15.954s-5.269.127-11.359 3.477a60.664 60.664 0 0 1-.382-.55c.187-4.574 1.073-9.141 2.359-12.518-.764.419-3.982 1.781-7.235 4.216C23.21 8.264 22.691 4.137 24.679 0 9.214 11.084.004 23.454 0 33.4c-.01 7.748 1.93 19.884 20.665 19.884 11.033 0 16.652-4.227 17.697-12.425l.248.248c-.048-.375-.076-.712-.117-1.066.124-1.407.145-2.893.014-4.52m-9.21 8.805c-1.207 2.104-1.812 2.724-9.577 2.944-7.762.22-9.206-1.469-10.637-4.11-4.086-7.535 1.069-12.288.773-11.737-.292.55-1.86 5.396 5.623 9.354-3.677-4.581 3.006-10.052 5.481-12.583 0 6.493 2.635 12.583 2.635 12.583s4.264-2.507 7.335-11.521c1.617 7.009 1.896 8.934-1.633 15.07"></path></svg>
                 Популярные
             </div>
-            <div class="game"><?
-            
-$args = array(
-    'cat' => 5,
-	'posts_per_page' => 6,
-	'orderby' => 'rand',
-);
-
-$q = new WP_Query($args);
-
-if($q->have_posts()) {
-    while($q->have_posts()){ $q->the_post();?>
-        <div class="game__item">
-            <div>
-                <div class="game__top">
-                    <img src="<? the_field("img-game"); ?>" alt="">
-                    <div class="labels">
-                        <? 
-                        $lab = get_field("new"); 
-                        foreach($lab as $l){ ?>
-                            <span class="label label-new"><?=$l;?></span>
-                        <? } ?>
-                    </div>
-                    <span class="info"><? the_field("percent"); ?></span>
-                    <div class="game__hidden">
-                        <a href="#" class="game__play">Играть</a>
-                        <a href="<?=get_permalink()?>" class="game__demo">Демо</a>
-                    </div>
-                </div>
-                <div class="game__name"><?=get_the_title();?></div>
+            <div class="game">
+            <?
+                if($popular->have_posts()) {
+                    while($popular->have_posts()){ $popular->the_post();?>
+                    <div class="game__item">
+                        <div>
+                            <div class="game__top">
+                                <img src="<? the_field("img-game"); ?>" alt="">
+                                <div class="labels">
+                                    <? 
+                                    $lab = get_field("new"); 
+                                    foreach($lab as $l){ ?>
+                                        <span class="label label-new"><?=$l;?></span>
+                                    <? } ?>
+                                </div>
+                                <span class="info"><? the_field("percent"); ?></span>
+                                <div class="game__hidden">
+                                    <a href="#" class="game__play">Играть</a>
+                                    <a href="<?=get_permalink()?>" class="game__demo">Демо</a>
+                                </div>
+                            </div>
+                            <div class="game__name"><?=get_the_title();?></div>
                         </div>
-        </div>
-	<? }
-}
-    wp_reset_postdata();?>
+                    </div>
+                    <? }
+                    }
+                wp_reset_postdata();
+                ?>
             </div>
         </div>
 
@@ -103,17 +118,8 @@ if($q->have_posts()) {
             </div>
             <div class="game">
             <?
-            
-            $args = array(
-                'cat' => 6,
-                'posts_per_page' => 6,
-                'orderby' => 'date',
-            );
-            
-            $q = new WP_Query($args);
-            
-            if($q->have_posts()) {
-                while($q->have_posts()){ $q->the_post();?>
+            if($new->have_posts()) {
+                while($new->have_posts()){ $new->the_post();?>
                     <div class="game__item">
                         <div>
                             <div class="game__top">
